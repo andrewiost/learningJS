@@ -152,6 +152,34 @@ let appData = {
     }
 };
 
+/*Interface elemets - buttons & checkboxes*/
+const calculate = document.getElementById("start"),
+    incomeAddBtn = document.getElementsByTagName("button")[0],
+    expensesAddBtn = document.getElementsByTagName("button")[1],
+    depositCheckbox = document.querySelector("#deposit-check");
+
+/*Interface elemets - fields collections*/
+const additionalIncomeFields = document.querySelectorAll(".additional_income-item");
+
+/*Interface elemets - fields value`s*/
+const budgetMonthValue = document.getElementsByClassName("budget_month-value"),
+    budgetDayValue = document.getElementsByClassName("budget_day-value"),
+    expensesMonthValue = document.getElementsByClassName("expenses_month-value"),
+    addIncomeValue = document.getElementsByClassName("additional_income-value"),
+    addExpensesValue = document.getElementsByClassName("additional_expenses-value"),
+    incomePeriodValue = document.getElementsByClassName("income_period-value"),
+    targetMonthValue = document.getElementsByClassName("target_month-value");
+
+/*Interface elemets - fields*/
+const salaryAmountField = document.querySelector(".salary-amount"),
+    incomeTitleFiled = document.querySelector(".income-title"),
+    incomeAmountField = document.querySelector(".income-amount"),
+    expensesTitleField = document.querySelector(".expenses-title"),
+    expensesAmountField = document.querySelector(".expenses-amount"),
+    addExpensesField = document.querySelector(".additional_expenses-item"),
+    targetAmountField = document.querySelector(".target-amount"),
+    periodSelectRange = document.querySelector(".period-select");
+
 const start = function () {
     do {
         money = prompt("Ваш месячный доход?", 44500);
