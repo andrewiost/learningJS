@@ -1,9 +1,9 @@
 window.addEventListener("DOMContentLoaded", () => {
-
+    "use strict";
     const dateTomorrow = Date.now() + 86400000;
 
     //Timer
-    const countTimer = deadline => {
+    const countTimer = (deadline) => {
         const timerHours = document.querySelector("#timer-hours"),
             timerMinutes = document.querySelector("#timer-minutes"),
             timerSeconds = document.querySelector("#timer-seconds");
@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
             return { timeRemaining, hours, minutes, seconds };
         };
 
-        const timePad = n => {
+        const timePad = (n) => {
             if (n < 10) {
                 return `0${n}`;
             } else {
@@ -59,10 +59,18 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         btnMenu.addEventListener("click", handlerMenu);
-        closeBtn.addEventListener("click", handlerMenu);
+        menu.addEventListener("click", (event) => {
+            let target = event.target;
 
-        menuItems.forEach(element => {
-            element.addEventListener("click", handlerMenu);
+            if (target === closeBtn) {
+                menu.classList.toggle("active-menu");
+            } else {
+                menuItems.forEach(item => {
+                    if (target === item) {
+                        menu.classList.toggle("active-menu");
+                    }
+                });
+            }
         });
     };
 
@@ -72,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const togglePopup = () => {
         const popup = document.querySelector(".popup"),
             popupBtn = document.querySelectorAll(".popup-btn"),
-            popupClose = document.querySelector(".popup-close"),
             popupContent = popup.querySelector(".popup-content");
 
         let innerWidth = window.innerWidth;
@@ -102,10 +109,55 @@ window.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        popupClose.addEventListener("click", () => {
-            popup.style.display = "none";
+        popup.addEventListener("click", (event) => {
+            let target = event.target;
+
+            if (target.classList.contains("popup-close")) {
+                popup.style.display = "none";
+            } else {
+                target = target.closest(".popup-content");
+
+                if (!target) {
+                    popup.style.display = "none";
+                }
+            }
         });
     };
 
     togglePopup();
+
+    //Tabs
+
+    const tabs = () => {
+        const tabHeader = document.querySelector(".service-header"),
+            tab = tabHeader.querySelectorAll(".service-header-tab"),
+            tabContent = document.querySelectorAll(".service-tab");
+
+        const toggleTabContent = (index) => {
+            for (let i = 0; i < tabContent.length; i++) {
+                if (index === i) {
+                    tab[i].classList.add("active");
+                    tabContent[i].classList.remove("d-none");
+                } else {
+                    tab[i].classList.remove("active");
+                    tabContent[i].classList.add("d-none");
+                }
+            }
+        };
+
+        tabHeader.addEventListener("click", (event) => {
+            let target = event.target;
+            target = target.closest(".service-header-tab");
+
+            if (target.classList.contains("service-header-tab")) {
+                tab.forEach((item, tabIndex) => {
+                    if (item === target) {
+                        toggleTabContent(tabIndex);
+                    }
+                });
+            }
+        });
+    };
+
+    tabs();
 });
