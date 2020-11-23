@@ -13,7 +13,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="./images/favicon/site.webmanifest">
 	<link rel="mask-icon" href="./images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-	<script src="scripts/script.js" defer></script>
+	<script src="./dist/main.js" defer></script>
 	<meta name="msapplication-TileColor" content="#b91d47">
 	<meta name="theme-color" content="#ffffff">
 </head>
@@ -194,7 +194,7 @@
 			<div class="underline"></div>
 			<div class="row">
 				<div class="col-lg-6 d-none d-lg-block flex">
-					<img src="images/calc.jpg" alt="">
+					<img src="images/calc/flat.jpg" alt="Офис">
 				</div>
 				<div class="col-lg-6 col-12 flex">
 					<div class="calc-block">
@@ -204,18 +204,19 @@
 							<option value="1.4">Интерьер Частного дома</option>
 							<option value="2">Интерьер Офиса</option>
 						</select>
-						<input type="text" min="1" step="1" class="calc-item calc-square" placeholder="Общая площадь*">
+						<input type="text" min="1" step="1" class="calc-item calc-square"
+									 placeholder="Общая площадь*">
 						<input type="text" min="1" step="1" class="calc-item calc-count"
-							placeholder="Количество помещений">
+									 placeholder="Количество помещений">
 						<input type="text" min="1" step="1" class="calc-item calc-day"
-							placeholder="Срок исполнения (в днях)">
+									 placeholder="Срок исполнения (в днях)">
 						<div class="calc-total">ИТОГО: <span id="total">0</span></div>
 						<div class="calc-mini">* стоимость по умолчанию расчитывается на 1 помещение и срок 10 дней <br>
 							**точная стоимость и сроки работ обговариваются индивидуально, после
 							ознакомления с техническим заданием.
 						</div>
 					</div>
-
+	
 				</div>
 			</div>
 		</div>
@@ -234,6 +235,7 @@
 					<div class="companies-hor-item"><img src="images/companies/companies-5.png" alt=""></div>
 					<div class="companies-hor-item"><img src="images/companies/companies-6.png" alt=""></div>
 					<div class="companies-hor-item"><img src="images/companies/companies-7.png" alt=""></div>
+					<div class="companies-hor-item"><img src="images/companies/companies-8.png" alt=""></div>
 				</div>
 			</div>
 		</div>
@@ -246,37 +248,37 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-1.jpg"
-						data-img="images/command/command-1a.jpg" alt="">
+							 data-img="images/command/command-1a.jpg" alt="">
 					<div class="description">Quentin Tarantino</div>
 					<p>Директор компании</p>
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-2.jpg"
-						data-img="images/command/command-2a.jpg" alt="">
+							 data-img="images/command/command-2a.jpg" alt="">
 					<div class="description">Parker Posey</div>
 					<p>Финансовый директор</p>
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-3.jpg"
-						data-img="images/command/command-3a.jpg" alt="">
+							 data-img="images/command/command-3a.jpg" alt="">
 					<div class="description">Gonzalo Higuaín</div>
 					<p>Инженер модельер</p>
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-4.jpg"
-						data-img="images/command/command-4a.jpg" alt="">
+							 data-img="images/command/command-4a.jpg" alt="">
 					<div class="description">Liam Payne</div>
 					<p>3D дизайнер</p>
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-5.jpg"
-						data-img="images/command/command-5a.jpg" alt="">
+							 data-img="images/command/command-5a.jpg" alt="">
 					<div class="description">Bristol Palin</div>
 					<p>Дизайнер интерьеров</p>
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<img class="command__photo" src="images/command/command-6.jpg"
-						data-img="images/command/command-6a.jpg" alt="">
+							 data-img="images/command/command-6a.jpg" alt="">
 					<div class="description">Dominic Monaghan</div>
 					<p>Дизайнер ландшафтов</p>
 				</div>
@@ -284,10 +286,8 @@
 			<div class="quote">
 				<img class="cov-left" src="images/command/cov-1.png" alt="">
 				<div class="description">Ты - то, что ты делаешь!</div>
-				<p>То, что мы делаем, определяет то, кем мы являемся. Люди чувствуют старание и чувствуют
-					неаккуратность.
-					Это<br> связано с уважением друг к другу, так что небрежность - это неуважение к самому себе.</p>
-				<span>Ислам Куаныш</span>
+				<p>А в начале пути мало, кто в нас верил, не правда ли?</p>
+				<span>Quentin Tarantino</span>
 				<p>Директор</p>
 				<img class="cov-right" src="images/command/cov-2.png" alt="">
 			</div>
