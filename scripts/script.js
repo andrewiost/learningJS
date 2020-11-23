@@ -1,6 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
     "use strict";
-    const dateTomorrow = Date.now() + 86400000;
+    const dateTomorrow = Date.now() + 86400000,
+        ourTeamContainer = document.getElementById("command"),
+        calcContainer = document.querySelector(".calc-block");
 
     //Timer
     const countTimer = (deadline) => {
@@ -271,4 +273,43 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     slider();
+
+    const changePhoto = event => {
+        const target = event.target,
+            firstSrc = target.getAttribute("src"),
+            secondSrc = target.getAttribute("data-img");
+
+        if (target.className === "command__photo" && event.type === "mouseover") {
+            target.setAttribute("src", secondSrc);
+            target.setAttribute("data-img", firstSrc);
+        } else if (target.className === "command__photo" && event.type === "mouseout") {
+            target.setAttribute("data-img", firstSrc);
+            target.setAttribute("src", secondSrc);
+        }
+    };
+
+    ourTeamContainer.addEventListener("mouseover", event => {
+        changePhoto(event);
+    });
+
+    ourTeamContainer.addEventListener("mouseout", event => {
+        changePhoto(event);
+    });
+
+    const inputDigitValid = target => {
+        const inputs = ["calc-square", "calc-count", "calc-day"],
+            reg = /\D/;
+
+        for (let i = 0; i < inputs.length; i++) {
+            let regClass = new RegExp(inputs[i]);
+
+            if (regClass.test(target.className)) {
+                target.value = target.value.replace(reg, "");
+            }
+        }
+    };
+
+    calcContainer.addEventListener("input", event => {
+        inputDigitValid(event.target);
+    });
 });
