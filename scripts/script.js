@@ -2,7 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
     "use strict";
     const dateTomorrow = Date.now() + 86400000,
         ourTeamContainer = document.getElementById("command"),
-        calcContainer = document.querySelector(".calc-block");
+        calcContainer = document.querySelector(".calc-block"),
+        body = document.querySelector("body");
 
     //Timer
     const countTimer = (deadline) => {
@@ -129,7 +130,6 @@ window.addEventListener("DOMContentLoaded", () => {
     togglePopup();
 
     //Tabs
-
     const tabs = () => {
         const tabHeader = document.querySelector(".service-header"),
             tab = tabHeader.querySelectorAll(".service-header-tab"),
@@ -164,7 +164,6 @@ window.addEventListener("DOMContentLoaded", () => {
     tabs();
 
     //Slider
-
     const slider = () => {
         const slide = document.querySelectorAll(".portfolio-item"),
             btn = document.querySelectorAll(".portfolio-btn"),
@@ -178,7 +177,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const createDots = sliderItems => {
             for (let i = 0; i < sliderItems.length; i++) {
                 const li = document.createElement("li");
-                
+
                 if (i === 0) {
                     li.className = "dot dot-active";
                 } else {
@@ -314,7 +313,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     //Calculator
-
     const calc = (price = 100) => {
         const calcType = document.querySelector(".calc-type"),
             calcSquare = document.querySelector(".calc-square"),
@@ -350,11 +348,99 @@ window.addEventListener("DOMContentLoaded", () => {
             const target = event.target;
 
             if (target.matches(".calc-type") || target.matches(".calc-square") ||
-            target.matches(".calc-day") || target.matches(".calc-count")) {
+                target.matches(".calc-day") || target.matches(".calc-count")) {
                 countSum();
             }
         });
     };
 
     calc(100);
+
+    //Send AJAX form
+    const sendForm = () => {
+        const errorMsg = "Что-то пошло не так...",
+            loadMsg = "Загрузка...",
+            successMsg = "Спасибо! Мы скоро свяжемся с вами.";
+
+        const statusMsg = document.createElement("div");
+
+        const postData = (body, outputData, errorData) => {
+            const request = new XMLHttpRequest();
+
+            request.addEventListener("readystatechange", () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+
+                if (request.status === 200) {
+                    outputData();
+                } else {
+                    errorData(request.status);
+                }
+            });
+
+            request.open("POST", "../server.php");
+            request.setRequestHeader("Content-Type", "application-json");
+            request.send(JSON.stringify(body));
+        };
+
+        body.addEventListener("submit", event => {
+            event.preventDefault();
+            
+            const ourForm = event.target;
+
+            if (ourForm.tagName === "FORM") {
+                ourForm.appendChild(statusMsg);
+                statusMsg.textContent = loadMsg;
+
+                const formData = new FormData(ourForm);
+
+                let body = {};
+
+                formData.forEach( (value, key) => {
+                    body[key] = value;
+                });
+
+                postData(body, () => {
+                    statusMsg.textContent = successMsg;
+                    ourForm.reset();
+                }, (error) => {
+                    statusMsg.textContent = errorMsg;
+                    console.log('Error :>> ', error);
+                });
+            }       
+        });
+    };
+
+    sendForm();
+
+    const phoneValid = element => {
+        const reg = /^\+?\d*$/;
+
+        if (!reg.test(element.value.trim())) {
+            element.value = element.value.slice(0, element.value.length - 1);
+        }
+    };
+
+    const cyrValid = element => {
+        const reg = /^([А-яЁ-ё]\s*)+\s*$/g;
+
+        if (!reg.test(element.value.trim())) {
+            element.value = element.value.slice(0, element.value.length - 1);
+        }
+    };
+
+    body.addEventListener("input", event => {
+        let target = event.target;
+        
+        if (target.classList.contains('form-phone')) {
+            phoneValid(target);
+        } else if (target.tagName.toLowerCase() === "input" &&
+        target.name.toLowerCase() === "user_name") {
+            cyrValid(target);
+        } else if (target.tagName.toLowerCase() === "input" &&
+        target.name.toLowerCase() === "user_message") {
+            cyrValid(target);
+        }
+    });
 });
